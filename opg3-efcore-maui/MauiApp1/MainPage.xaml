@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp1.Viewmodels"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             x:DataType="vm:BookViewModel"
+             x:Class="MauiApp1.MainPage">
+
+    <FlexLayout Direction="Column" Margin="10" Padding="10" >
+
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Entry Text="{Binding Title}" Placeholder="Insert Title"  />
+            <Entry Text="{Binding Author}" Placeholder="Insert author"   />
+            <Entry Text="{Binding AmountOfPages}" Placeholder="amount of pages" Keyboard="Numeric" />
+
+            <Button Text="Add book" Command="{Binding AddBookCommand}" />
+            <Button Text="Delete book" BackgroundColor="Red" Command="{Binding DeleteBookCommand}" />
+        </VerticalStackLayout>
+        
+        <Border HeightRequest="200">
+            <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding FetchBooksCommand}">
+                <ScrollView>
+                    <ListView ItemsSource="{Binding Books}" FlexLayout.Grow="1" SelectedItem="{Binding SelectedItem}"  >
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Book">
+                                <ViewCell>
+                                    <Border Padding="10" >
+                                        <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10" >
+                                            <Label Text="{Binding title}"  />
+                                            <Label Text="{Binding author}"  />
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </ScrollView>
+            </RefreshView>
+        </Border>
+
+
+    </FlexLayout>
+
+</ContentPage>
