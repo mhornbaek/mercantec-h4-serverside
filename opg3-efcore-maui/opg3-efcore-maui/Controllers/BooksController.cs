@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace opg3_efcore_maui.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly BookDbContext _context;
@@ -22,6 +24,7 @@ namespace opg3_efcore_maui.Controllers
 
         // GET: api/Books
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
             return await _context.Books.ToListAsync();

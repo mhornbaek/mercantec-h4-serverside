@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace opg3_efcore_maui.Models
 {
-    public class BookDbContext : DbContext
+    public class BookDbContext : IdentityDbContext<BookIdentitiy>
     {
         public BookDbContext(DbContextOptions options) : base(options)
         {
